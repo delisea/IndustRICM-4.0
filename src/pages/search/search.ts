@@ -35,7 +35,6 @@ export class SearchPage {
   }
 
   onSegmentChanged(segmentButton) {
-    console.log("Change");
     this.searchItems();
   }
 
@@ -58,13 +57,13 @@ export class SearchPage {
       this.results = this.fetchResults(this.searchQuery);
     }
     else {
-      console.log("Empty list");
       this.results = Observable.of([]);
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
+  onClick(loc:Localisable){
+    console.log("Click detected");
+    this.navCtrl.push(this.pushPage, { resultParam: loc });
   }
 }
 

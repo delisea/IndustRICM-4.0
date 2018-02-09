@@ -9,7 +9,7 @@ import { MapPage } from '../pages/map/map';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search'; 
-
+import { DetailsPage } from '../pages/details/details';
 
 
 @NgModule({
@@ -18,6 +18,7 @@ import { SearchPage } from '../pages/search/search';
     MapPage,
     SettingsPage,
     SearchPage,
+    DetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import { SearchPage } from '../pages/search/search';
     MyApp,
     MapPage,
     SettingsPage,
-    SearchPage
+    SearchPage,
+    DetailsPage,
   ],
   providers: [
     Geolocation,
