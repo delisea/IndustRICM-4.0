@@ -1,16 +1,17 @@
-.ios, .md {
+page-map {
+  .leaflet-popup-content-wrapper {
+    background:#175717;
+    color:#FFDA8C;
+    font-size:12px;
+    margin-bottom:20px;
+  }
 
-    map-page {
+  .leaflet-popup-content-wrapper .leaflet-popup-content {
 
-      .scroll {
-        height: 100%
-      }
+  }
 
-      #map {
-        width: 100%;
-        height: 100%;
-      }
-
-    }
-
+  .leaflet-popup-tip {
+    background:#ffffff;
+    opacity:0;
+  }
 }
