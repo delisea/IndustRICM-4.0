@@ -4,8 +4,6 @@ import { DetailsPage } from "../details/details"
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { Examples } from './examples'
-
 
 export interface Localisable{
   categorie: string;
