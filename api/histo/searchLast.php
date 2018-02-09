@@ -25,3 +25,4 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	array_push($staffs_arr['records'], $staff_item);
 }
 echo json_encode($staffs_arr)
+?>
