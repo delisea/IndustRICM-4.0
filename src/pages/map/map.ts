@@ -10,7 +10,8 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  popover:any;
+  selectedLocalisable: string = "all";
+  selectedLevel: string = "level1";
 
   constructor(
     public navCtrl: NavController,
@@ -60,4 +61,38 @@ loadmap() {
 	this.map.addLayer(markerGroup);*/
   }
 
+  onLocalisableChanged(segmentButton) {
+    switch (segmentButton.value) {
+      case "all":
+        // displayAllMarkers()
+        console.log("displayAllMarkers()");
+        break;
+      case "staff":
+        // displayStaffMarkers()
+        console.log("displayStaffMarkers()");
+        break;
+      case "equipement":
+        // displayEquipementMarkers
+        console.log("displayEquipementMarkers()");
+        break;      
+      default:
+        throw new Error("Unexpected segment value");
+    }
+  }
+
+  onLevelChanged(segmentButton){
+    switch (segmentButton.value) {
+      case "level1":
+        console.log("displayLevel1()");
+        break;
+      case "level2":
+        console.log("displayLevel2()");
+        break;
+      case "level3":
+        console.log("displayLevel3()");
+        break;      
+      default:
+        throw new Error("Unexpected segment value");
+    }
+  }
 }

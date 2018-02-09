@@ -16,8 +16,35 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedLocalisable" (ionChange)="onLocalisableChanged($event)">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="staff">
+        Staff
+      </ion-segment-button>
+      <ion-segment-button value="equipement">
+        Equipement
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="map" style="width:100%; height:100%;"></div>
 </ion-content>
+
+<ion-footer>
+  <ion-segment [(ngModel)]="selectedLevel" (ionChange)="onLevelChanged($event)">
+    <ion-segment-button value="level1">
+      Level 1
+    </ion-segment-button>
+    <ion-segment-button value="level2">
+      Level 2
+    </ion-segment-button>
+    <ion-segment-button value="level3">
+      Level 3
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>
