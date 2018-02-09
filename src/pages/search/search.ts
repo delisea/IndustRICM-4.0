@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Searchbar } from 'ionic-angular';
 import { DetailsPage } from "../details/details"
 import { Observable } from 'rxjs/Observable';
+import { HttpParams, HttpClient } from '@angular/common/http/';
+
 import 'rxjs/add/observable/of';
 
 
@@ -9,6 +11,9 @@ export interface Localisable{
   categorie: string;
   id: number;
   name: string;
+  locationX: number;
+  locationY: number;
+  level: number;
 }
 
 
@@ -29,7 +34,7 @@ export class SearchPage {
   staffExample: Localisable[] = staffExample;
 
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private httpClient: HttpClient) {
     this.searchQuery ;
     this.searchItems();
     this.pushPage = DetailsPage;
@@ -40,17 +45,22 @@ export class SearchPage {
   }
 
   fetchResults(query: string): Observable<Localisable[]> {
-    // TODO : NYI
-    switch (this.selectedLocalisable) {
-      case "all":
-      return Observable.of(this.allLocalisablesExample);
-      case "staff":
-      return Observable.of(this.staffExample);
-      case "equipement":
-      return Observable.of(this.equipementExample);      
-      default:
-      throw new Error("Unexpected localisable type");
-    }
+    // FIXME : add real url prefix 
+    let url: string = "/" + this.selectedLocalisable + '/get.php?name=' + query;
+    console.log(url);
+    let params = new HttpParams().set('name', query);
+    return this.httpClient.get<Localisable[]>(url, { params });
+    // switch (this.selectedLocalisable) {
+    //   case "all":
+    //     return Observable.of(allLocalisablesExample);
+    //   case "equipement":
+    //     return Observable.of(equipementExample);
+    //   case "staff":
+    //     return Observable.of(staffExample);
+    //   default:
+    //     // code...
+    //     break;
+    // }
   }
 
   searchItems(): void {

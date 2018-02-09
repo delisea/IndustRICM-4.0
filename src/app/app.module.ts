@@ -10,6 +10,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search'; 
 import { DetailsPage } from '../pages/details/details';
+import { HttpClientModule } from '@angular/common/http/';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { DetailsPage } from '../pages/details/details';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
