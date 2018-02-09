@@ -35,7 +35,7 @@ loadmap() {
       iconAnchor: [15, 30]
     });
 
-	let data = {staff: [{idStaff: "1", date: "42", longitude: "5", latitude: "7"},{idStaff: "2", date: "43", longitude: "8", latitude: "7"}]}
+	let data = {staff: [{username: "Bernard", idStaff: "1", date: "42", longitude: "5", latitude: "7"},{username: "Maxime",idStaff: "2", date: "43", longitude: "8", latitude: "7"}]}
 	
 	let markerGroup = Leaflet.featureGroup();
 	// let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
@@ -47,11 +47,10 @@ loadmap() {
 	this.map.addLayer(markerGroup);
 	
 	
-	if(0)
-	this.http.post(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*/).subscribe(data => {
+	/*this.http.post(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*).subscribe(data => {
 		console.log(data);
 		this.nav.setRoot('MenuPage');
-	});
+	});*/
 
     /*var customPopup = "<strong>"+this.username+"</strong><br>"+10+" - "+10
 	let markerGroup = Leaflet.featureGroup();
