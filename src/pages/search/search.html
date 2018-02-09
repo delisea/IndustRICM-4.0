@@ -7,7 +7,7 @@
       Search
   </ion-title>
   </ion-navbar>
-  <ion-searchbar (ionInput)="searchItems()" [(ngModel)]="searchQuery">
+  <ion-searchbar #searchInput (ionInput)="searchItems()" [(ngModel)]="searchQuery">
   </ion-searchbar>
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="selectedLocalisable" (ionChange)="onSegmentChanged($event)">

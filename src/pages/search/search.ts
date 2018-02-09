@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Searchbar } from 'ionic-angular';
 import { DetailsPage } from "../details/details"
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -17,6 +17,7 @@ export interface Localisable{
   templateUrl: 'search.html',
 })
 export class SearchPage {
+  @ViewChild('searchInput') searchInput: Searchbar;
 
   results: Observable<Localisable[]>;
   pushPage: any;
@@ -62,9 +63,16 @@ export class SearchPage {
   }
 
   onClick(loc:Localisable){
-    console.log("Click detected");
     this.navCtrl.push(this.pushPage, { resultParam: loc });
   }
+
+  ionViewDidLoad(){
+    setTimeout(() => {
+      this.searchInput.setFocus();
+    },150);
+
+  }
+
 }
 
 
