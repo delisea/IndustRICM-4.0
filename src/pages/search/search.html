@@ -2,13 +2,34 @@
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      QR Code Reader
-    </ion-title>
+  </button>
+  <ion-title>
+      Search
+  </ion-title>
   </ion-navbar>
+  <ion-searchbar (ionInput)="searchItems()" [(ngModel)]="searchQuery">
+  </ion-searchbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="selectedLocalisable">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="staff">
+        Staff
+      </ion-segment-button>
+      <ion-segment-button value="equipement">
+        Equipement
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    <button [navPush]="pushPage" [navParams]="{resultParam: element}" ion-item *ngFor="let localisable of results | async">
+      <h2>{{ localisable.name }}</h2>
+      <p>{{ localisable.categorie }} • {{ localisable.id }}</p>
+    </button>
+</ion-list>
 </ion-content>
+
