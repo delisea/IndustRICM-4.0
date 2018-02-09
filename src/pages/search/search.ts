@@ -21,7 +21,7 @@ export class SearchPage {
   results: Observable<Localisable[]>;
   pushPage: any;
   searchQuery: string;
-  selectedLocalisable: string;
+  selectedLocalisable: string = "all";
   
   allLocalisablesExample: Localisable[] = allLocalisablesExample;
   equipementExample: Localisable[] = equipementExample;
@@ -31,7 +31,12 @@ export class SearchPage {
   constructor(public navCtrl: NavController) {
     this.searchQuery ;
     this.searchItems();
-    // this.pushPage = DetailsPage;
+    this.pushPage = DetailsPage;
+  }
+
+  onSegmentChanged(segmentButton) {
+    console.log("Change");
+    this.searchItems();
   }
 
   fetchResults(query: string): Observable<Localisable[]> {
@@ -63,7 +68,12 @@ export class SearchPage {
   }
 }
 
-export const allLocalisablesExample: Localisable[] = [
+
+
+
+
+
+const allLocalisablesExample: Localisable[] = [
 {
   categorie: "staff",
   id: 0,

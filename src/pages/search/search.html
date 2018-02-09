@@ -10,7 +10,7 @@
   <ion-searchbar (ionInput)="searchItems()" [(ngModel)]="searchQuery">
   </ion-searchbar>
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="selectedLocalisable">
+    <ion-segment [(ngModel)]="selectedLocalisable" (ionChange)="onSegmentChanged($event)">
       <ion-segment-button value="all">
         All
       </ion-segment-button>
@@ -26,6 +26,9 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item *ngIf="!(results | async)?.length">
+      Pas de resultat
+    </ion-item>
     <button [navPush]="pushPage" [navParams]="{resultParam: element}" ion-item *ngFor="let localisable of results | async">
       <h2>{{ localisable.name }}</h2>
       <p>{{ localisable.categorie }} • {{ localisable.id }}</p>
