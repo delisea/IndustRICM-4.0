@@ -1,3 +1,36 @@
 page-settings {
 
+  .home-content{
+    background: #888888;
+
+    .submit-btn{
+         background: #ff4848;
+         border-radius: 30px !important;
+         border: 1px solid #ff4848;
+         opacity: 1;
+         font-size:  1em;
+         text-shadow: 0.5px 0.5px #111111;
+         color: #ffffff;
+    }
+    .submit-btn2{
+           background: #1c831c;
+         border-radius: 30px !important;
+         border: 1px solid #1c831c;
+         opacity: 1;
+         font-size:  1em;
+         text-shadow: 0.5px 0.5px #111111;
+         color: #ffffff;
+    }
+
+    .submit-btn3{
+           background: #2966b8;
+         border-radius: 30px !important;
+         border: 1px solid #2966b8;
+         opacity: 1;
+         font-size:  1em;
+         text-shadow: 0.5px 0.5px #111111;
+         color: #ffffff;
+    }
+
+  }
 }
