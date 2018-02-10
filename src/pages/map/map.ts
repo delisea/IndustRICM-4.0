@@ -121,12 +121,12 @@ export class MapPage {
         // let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
         for (let e of data.staff) {if(Number(e.floor) != floor) continue;
           var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
-          let marker: any = Leaflet.marker([Number(e.locationX), Number(e.locationY)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:(e.id==2)?this.IconRed:this.IconBlue}).bindPopup(customPopup,{closeButton:false})
+          let marker: any = Leaflet.marker([Number(e.locationY), Number(e.locationX)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:(Number(e.id)==2)?this.IconRed:this.IconBlue}).bindPopup(customPopup,{closeButton:false})
           markerGroup.addLayer(marker);
         }
         for (let e of data.matt) {if(Number(e.floor) != floor) continue;
           var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
-          let marker: any = Leaflet.marker([Number(e.locationX), Number(e.locationY)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:this.IconGreen}).bindPopup(customPopup,{closeButton:false})
+          let marker: any = Leaflet.marker([Number(e.locationY), Number(e.locationX)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:this.IconGreen}).bindPopup(customPopup,{closeButton:false})
           markerGroup.addLayer(marker);
         }
         myMap.addLayer(markerGroup);

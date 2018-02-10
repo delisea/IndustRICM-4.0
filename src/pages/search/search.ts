@@ -46,15 +46,15 @@ export class SearchPage {
 
   fetchResults(query: string): Observable<Localisable[]> {
     // FIXME : add real url prefix 
-    let url: string = "/" + this.selectedLocalisable + '/get.php';
+    let url: string = "http://closed.power-heberg.com/industRICM/api/" + this.selectedLocalisable + '/get.php';
     console.log(url);
-    let params = new HttpParams().set('name', query);
-    return this.httpClient.get<Localisable[]>(url, { params });
+    let params = new HttpParams().set('params', query);
+    return this.httpClient.post<Localisable[]>(url, { params });
   }
 
   searchItems(): void {
     if (this.searchQuery) {
-      this.results = this.fetchResults(this.searchQuery);
+      this.results = this.fetchResults(JSON.stringify({name: this.searchQuery}));
     }
     else {
       this.results = Observable.of([]);
