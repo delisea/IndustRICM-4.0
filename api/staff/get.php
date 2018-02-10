@@ -64,7 +64,7 @@ if ($num > 0) {
 		extract($row);
 
     if($working==1){
-      $query='SELECT h.locationX, h.locationY
+      $query='SELECT h.locationX, h.locationY, h.locationZ
                         FROM Staff s
                         LEFT JOIN HistoS h
                         ON s.id=h.idStaff
