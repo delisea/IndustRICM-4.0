@@ -89,7 +89,7 @@ export class SearchPage {
 
 
 
-
+/*
 const allLocalisablesExample: Localisable[] = [
 {
   categorie: "staff",
@@ -155,4 +155,4 @@ export const equipementExample: Localisable[] = [
   id: 2,
   name: "Grease gun",
 }
-];
+];*/

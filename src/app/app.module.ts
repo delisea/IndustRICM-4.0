@@ -11,6 +11,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search'; 
 import { DetailsPage } from '../pages/details/details';
 import { HttpClientModule } from '@angular/common/http/';
+import { HttpModule } from '@angular/http';
 
 
 
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http/';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
