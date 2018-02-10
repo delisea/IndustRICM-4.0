@@ -94,7 +94,7 @@ export class MapPage {
 
 let alert = this.alertCtrl.create({
 					title: 'Panne affectée',
-					subTitle: 'La Dynamo est en panne, au boulot!',
+					subTitle: 'Panne sur ILPACK3',
     buttons: [
       {
         text: 'continuer',
