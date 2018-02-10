@@ -3,6 +3,19 @@ import { NavController } from 'ionic-angular';
 import Leaflet from 'leaflet';
 import { HttpParams, HttpClient } from '@angular/common/http/';
 
+export interface mapItem{
+  id: string;
+  name: string;
+  working: string;
+  locationX: string;
+  locationY: string;
+  date: string;
+}
+export interface dataItem{
+  staff: mapItem[];
+}
+
+
 @Component({
   selector: 'map-page',
   templateUrl: 'map.html'
@@ -17,18 +30,21 @@ export class MapPage {
 
   constructor(
     public navCtrl: NavController,
-	private httpClient: HttpClient,
-    ) {
+	  private httpClient: HttpClient,
+  ) {
 
 	}
 
 	ionViewDidLoad() {
 		if(!this.loaded) {
-			this.loadmap()
-			this.loaded = 1
+			this.loadmap();
+			this.loaded = 1;
 		}
 	}
 
+  ionViewCanLeave(){
+    document.getElementById("map").outerHTML = "";
+  }
 
 	loadmap() {
     this.map = Leaflet.map("map", {attributionControl: false}).fitWorld();
@@ -47,14 +63,14 @@ export class MapPage {
   	let apiURL = "http://closed.power-heberg.com/industRICM/api/";
   	//let data = {staff: [{username: "Bernard", idStaff: "1", date: "42", longitude: "5", latitude: "7"},{username: "Maxime",idStaff: "2", date: "43", longitude: "8", latitude: "7"}]}
 	
-  	this.httpClient.post(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*/).subscribe(
+  	this.httpClient.post<dataItem>(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*/).subscribe(
       data => {
         let markerGroup = Leaflet.featureGroup();
     	  // let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
     	  for (let e of data.staff) {
     		  var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
     		  let marker: any = Leaflet.marker([Number(e.locationX), Number(e.locationY)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
-    		markerGroup.addLayer(marker);
+    		  markerGroup.addLayer(marker);
     	  }
     	  this.map.addLayer(markerGroup);
     		//console.log(data);

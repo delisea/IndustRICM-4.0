@@ -46,21 +46,10 @@ export class SearchPage {
 
   fetchResults(query: string): Observable<Localisable[]> {
     // FIXME : add real url prefix 
-    let url: string = "/" + this.selectedLocalisable + '/get.php?name=' + query;
+    let url: string = "/" + this.selectedLocalisable + '/get.php';
     console.log(url);
     let params = new HttpParams().set('name', query);
     return this.httpClient.get<Localisable[]>(url, { params });
-    // switch (this.selectedLocalisable) {
-    //   case "all":
-    //     return Observable.of(allLocalisablesExample);
-    //   case "equipement":
-    //     return Observable.of(equipementExample);
-    //   case "staff":
-    //     return Observable.of(staffExample);
-    //   default:
-    //     // code...
-    //     break;
-    // }
   }
 
   searchItems(): void {
@@ -89,37 +78,55 @@ export class SearchPage {
 
 
 
-/*
+
 const allLocalisablesExample: Localisable[] = [
 {
   categorie: "staff",
   id: 0,
   name: "Didier Donsez",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }, 
 {
   categorie: "staff",
   id: 1,
   name: "Alan Turing",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },
 {
   categorie: "staff",
   id: 2,
   name: "Richard Stallman",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },  
 {
   categorie: "equipement",
   id: 0,
   name: "Torque wrench",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }, 
 {
   categorie: "equipement",
   id: 1,
   name: "Hydrolic column drill",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },
 {
   categorie: "equipement",
   id: 2,
   name: "Grease gun",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }
 ];
 export const staffExample: Localisable[] = [
@@ -127,16 +134,25 @@ export const staffExample: Localisable[] = [
   categorie: "staff",
   id: 0,
   name: "Didier Donsez",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }, 
 {
   categorie: "staff",
   id: 1,
   name: "Alan Turing",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },
 {
   categorie: "staff",
   id: 2,
   name: "Richard Stallman",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },  
 ]; 
 export const equipementExample: Localisable[] = [
@@ -144,15 +160,24 @@ export const equipementExample: Localisable[] = [
   categorie: "equipement",
   id: 0,
   name: "Torque wrench",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }, 
 {
   categorie: "equipement",
   id: 1,
   name: "Hydrolic column drill",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 },
 {
   categorie: "equipement",
   id: 2,
   name: "Grease gun",
+  locationX: 0,
+  locationY: 0,
+  level: 0
 }
-];*/
+];
