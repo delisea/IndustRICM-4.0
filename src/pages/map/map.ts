@@ -94,13 +94,13 @@ export class MapPage {
 
 let alert = this.alertCtrl.create({
 					title: 'Panne affectée',
-					subTitle: 'La '+" "+' est en panne, au boulot!',
+					subTitle: 'La Dynamo est en panne, au boulot!',
     buttons: [
       {
         text: 'continuer',
         handler: () => {
-          console.log(console.log(data));
-			this.navCtrl.push(DetailsPage, { resultParam: data });
+          //console.log(console.log(data));
+			//this.navCtrl.push(DetailsPage, { resultParam: {name: "Dynamo", id: 4} });
         }
       }
     ]
