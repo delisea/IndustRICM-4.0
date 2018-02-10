@@ -29,6 +29,7 @@ export class MapPage {
 		}
 	}
 
+
 	loadmap() {
     this.map = Leaflet.map("map", {attributionControl: false}).fitWorld();
     Leaflet.control.scale({imperial: false}).addTo(this.map);
@@ -43,31 +44,33 @@ export class MapPage {
       iconAnchor: [15, 30]
     });
 
-	let apiURL = "http://closed.power-heberg.com/industRICM/api/"
-	//let data = {staff: [{username: "Bernard", idStaff: "1", date: "42", longitude: "5", latitude: "7"},{username: "Maxime",idStaff: "2", date: "43", longitude: "8", latitude: "7"}]}
+  	let apiURL = "http://closed.power-heberg.com/industRICM/api/";
+  	//let data = {staff: [{username: "Bernard", idStaff: "1", date: "42", longitude: "5", latitude: "7"},{username: "Maxime",idStaff: "2", date: "43", longitude: "8", latitude: "7"}]}
 	
-	
-	
-	
-	this.httpClient.post(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*/).subscribe(data => {
-		let markerGroup = Leaflet.featureGroup();
-	// let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
-	for (let e of data.staff) {
-		var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
-		let marker: any = Leaflet.marker([Number(e.locationX), Number(e.locationY)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
-		markerGroup.addLayer(marker);
-	}
-	this.map.addLayer(markerGroup);
-		//console.log(data);
-		//this.nav.setRoot('MenuPage');
-	}, error => { console.log(error) });
+  	this.httpClient.post(apiURL+'histo/searchLast.php', {}/*JSON.stringify(credentials)*/).subscribe(
+      data => {
+        let markerGroup = Leaflet.featureGroup();
+    	  // let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
+    	  for (let e of data.staff) {
+    		  var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
+    		  let marker: any = Leaflet.marker([Number(e.locationX), Number(e.locationY)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
+    		markerGroup.addLayer(marker);
+    	  }
+    	  this.map.addLayer(markerGroup);
+    		//console.log(data);
+    		//this.nav.setRoot('MenuPage');
+      }, 
+      error => { 
+        console.log(error);
+      }
+    );
 
-    /*var customPopup = "<strong>"+this.username+"</strong><br>"+10+" - "+10
-	let markerGroup = Leaflet.featureGroup();
-	// let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
-	let marker: any = Leaflet.marker([0, 0], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false})
-	markerGroup.addLayer(marker);
-	this.map.addLayer(markerGroup);*/
+    // var customPopup = "<strong>"+this.username+"</strong><br>"+10+" - "+10;
+  	// let markerGroup = Leaflet.featureGroup();
+  	// // let marker: any = Leaflet.marker([e.latitude, e.longitude], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false});
+  	// let marker: any = Leaflet.marker([0, 0], {icon:IconGreen}).bindPopup(customPopup,{closeButton:false});
+  	// markerGroup.addLayer(marker);
+  	// this.map.addLayer(markerGroup);
   }
 
   onLocalisableChanged(segmentButton) {
