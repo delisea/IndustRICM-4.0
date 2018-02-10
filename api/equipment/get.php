@@ -63,7 +63,7 @@ if ($num > 0) {
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-    $query='SELECT h.locationX, h.locationY
+    $query='SELECT h.locationX, h.locationY, h.locationZ
     FROM Equipment e
     LEFT JOIN HistoE h
 		ON e.id=h.idEquipment
