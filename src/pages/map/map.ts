@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import Leaflet from 'leaflet';
 import { HttpParams, HttpClient } from '@angular/common/http/';
+import { AlertController } from 'ionic-angular';
+import { DetailsPage } from "../details/details"
 
 export interface mapItem{
   id: string;
@@ -38,6 +40,7 @@ export class MapPage {
   map2: any;
   map3: any;
   loaded: any = 0;
+  private currentTimeout: number;
 
   selectedLocalisable: string = "all";
   selectedLevel: string = "level1";
@@ -70,7 +73,9 @@ export class MapPage {
   constructor(
     public navCtrl: NavController,
 	  private httpClient: HttpClient,
+	  private alertCtrl: AlertController,
   ) {
+	setInterval(() => { this.timi() }, 5000);
 
 	}
 
@@ -78,9 +83,48 @@ export class MapPage {
     this.loadmap("map1", this.map1, 0);
     this.loadmap("map2", this.map2, 1);
     this.loadmap("map3", this.map3, 2);
-
 	}
 
+	timi() {console.log("top");
+		let params = new HttpParams().set('params', "{\"id\": \"2\"}");
+		this.httpClient.post<dataItem>(this.apiURL+'maintenance/notif.php', params).subscribe(
+		  data => {
+				//if(this.alertCtrl != undefined) {
+
+
+let alert = this.alertCtrl.create({
+					title: 'Panne affectée',
+					subTitle: 'La '+" "+' est en panne, au boulot!',
+    buttons: [
+      {
+        text: 'continuer',
+        handler: () => {
+          console.log(console.log(data));
+			this.navCtrl.push(DetailsPage, { resultParam: data });
+        }
+      }
+    ]
+  });				
+  
+  
+				alert.present();//}
+				/*else if(this.alertCtrl != undefined) {
+				let alert = this.alertCtrl.create({
+					title: 'Panne affectée',
+					subTitle: 'La '+" "+' est en panne, au boulot!',
+					buttons: ['continuer']
+				  });
+				alert.present();console.log(data);}*/
+			},
+			//console.log(data);
+			//this.nav.setRoot('MenuPage');, 
+		  error => { 
+		  //console.log(error);
+		  }
+		);
+	//setInterval(() => { this.timi() }, 5000);
+	}
+	
   ionViewCanLeave(){
     // FIXME
     document.getElementById("map1").outerHTML = "";
@@ -94,7 +138,7 @@ export class MapPage {
 
 	loadmap(str: string, myMap: any, floor: number) {
 
-    myMap = Leaflet.map(str, {attributionControl: false, noWrap: true}).fitWorld();
+    myMap = Leaflet.map(str, {attributionControl: false/*, noWrap: true*/}).fitWorld();
     // Leaflet.control.scale({imperial: false}).addTo(myMap);
     let mapUrl: string ;
     switch (str) {
@@ -136,8 +180,8 @@ export class MapPage {
           markerGroup.addLayer(marker);
         }
         for (let e of data.matt) {if(Number(e.floor) != floor) continue;
-          var customPopup = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
-          let marker: any = Leaflet.marker([Number(e.locationY), Number(e.locationX)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:this.IconGreen}).bindPopup(customPopup,{closeButton:false})
+          var customPopup2 = "<strong>"+e.name+"</strong><br>"+e.locationX+" - "+e.locationY
+          let marker: any = Leaflet.marker([Number(e.locationY), Number(e.locationX)]/*{lat: e.latitude, lon: e.longitude}*/, {icon:this.IconGreen}).bindPopup(customPopup2,{closeButton:false})
           markerGroup.addLayer(marker);
         }
         myMap.addLayer(markerGroup);

@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { HttpParams, HttpClient } from '@angular/common/http/';
 
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
+  apiURL = "http://closed.power-heberg.com/industRICM/api/";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private httpClient: HttpClient, public navParams: NavParams, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -25,7 +27,17 @@ presentAlert() {
 }
   
 	trigger_alert() {
-		this.presentAlert();
+		let params = new HttpParams().set('params', "{\"id\": \"4\"}");
+		this.httpClient.post<dataItem>(this.apiURL+'maintenance/alert.php', params).subscribe(
+      data => {
+			this.presentAlert();
+        },
+        //console.log(data);
+        //this.nav.setRoot('MenuPage');, 
+      error => { 
+			this.presentAlert();
+      }
+    );
 		/*if(this.flag)
 			return;
 		this.flag= true;

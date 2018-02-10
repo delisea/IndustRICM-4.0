@@ -7,13 +7,31 @@ import { HttpParams, HttpClient } from '@angular/common/http/';
 import 'rxjs/add/observable/of';
 
 
-export interface Localisable{
-  categorie: string;
-  id: number;
+export interface LocalisableP{
   name: string;
-  locationX: number;
-  locationY: number;
-  level: number;
+  id: number;
+  position: {
+	  locationX: number;
+	  locationY: number;
+	  floor: number;
+  }
+}
+
+export interface LocalisableM{
+  name: string;
+  id: number;
+  categorie: string;
+  position: {
+	  locationX: number;
+	  locationY: number;
+	  floor: number;
+  }
+}
+
+export type Localisable = LocalisableP|LocalisableM;
+
+export interface resu {
+	records: Localisable[];
 }
 
 
@@ -24,14 +42,10 @@ export interface Localisable{
 export class SearchPage {
   @ViewChild('searchInput') searchInput: Searchbar;
 
-  results: Observable<Localisable[]>;
+  results: Localisable[];
   pushPage: any;
   searchQuery: string;
   selectedLocalisable: string = "all";
-  
-  allLocalisablesExample: Localisable[] = allLocalisablesExample;
-  equipementExample: Localisable[] = equipementExample;
-  staffExample: Localisable[] = staffExample;
 
 
   constructor(public navCtrl: NavController, private httpClient: HttpClient) {
@@ -44,20 +58,24 @@ export class SearchPage {
     this.searchItems();
   }
 
-  fetchResults(query: string): Observable<Localisable[]> {
+  fetchResults(query: string): Observable<resu> {
     // FIXME : add real url prefix 
     let url: string = "http://closed.power-heberg.com/industRICM/api/" + this.selectedLocalisable + '/get.php';
     console.log(url);
     let params = new HttpParams().set('params', query);
-    return this.httpClient.post<Localisable[]>(url, { params });
+    return this.httpClient.post<resu>(url, params);
   }
 
   searchItems(): void {
     if (this.searchQuery) {
-      this.results = this.fetchResults(JSON.stringify({name: this.searchQuery}));
+      this.fetchResults(JSON.stringify({name: this.searchQuery})).subscribe(data => {
+		  console.log(data);
+		  this.results =  data.records;
+		  console.log(this.results);
+	  });
     }
     else {
-      this.results = Observable.of([]);
+      this.results = [];
     }
   }
 
@@ -73,111 +91,3 @@ export class SearchPage {
   }
 
 }
-
-
-
-
-
-
-const allLocalisablesExample: Localisable[] = [
-{
-  categorie: "staff",
-  id: 0,
-  name: "Didier Donsez",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}, 
-{
-  categorie: "staff",
-  id: 1,
-  name: "Alan Turing",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},
-{
-  categorie: "staff",
-  id: 2,
-  name: "Richard Stallman",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},  
-{
-  categorie: "equipement",
-  id: 0,
-  name: "Torque wrench",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}, 
-{
-  categorie: "equipement",
-  id: 1,
-  name: "Hydrolic column drill",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},
-{
-  categorie: "equipement",
-  id: 2,
-  name: "Grease gun",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}
-];
-export const staffExample: Localisable[] = [
-{
-  categorie: "staff",
-  id: 0,
-  name: "Didier Donsez",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}, 
-{
-  categorie: "staff",
-  id: 1,
-  name: "Alan Turing",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},
-{
-  categorie: "staff",
-  id: 2,
-  name: "Richard Stallman",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},  
-]; 
-export const equipementExample: Localisable[] = [
-{
-  categorie: "equipement",
-  id: 0,
-  name: "Torque wrench",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}, 
-{
-  categorie: "equipement",
-  id: 1,
-  name: "Hydrolic column drill",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-},
-{
-  categorie: "equipement",
-  id: 2,
-  name: "Grease gun",
-  locationX: 0,
-  locationY: 0,
-  level: 0
-}
-];

@@ -26,12 +26,12 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngIf="!(results | async)?.length">
+    <ion-item *ngIf="!results?.length">
       No results
     </ion-item>
-    <button (click)="onClick(localisable)" ion-item *ngFor="let localisable of results | async">
+    <button (click)="onClick(localisable)" ion-item *ngFor="let localisable of results">
       <h2>{{ localisable.name }}</h2>
-      <p>{{ localisable.categorie }} • {{ localisable.id }}</p>
+      <p>{{ (localisable.category !== undefined)? "Equipment" : "Staff" }} • {{ localisable.position.floor }}</p>
     </button>
 </ion-list>
 </ion-content>
