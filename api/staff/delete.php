@@ -11,7 +11,7 @@ include_once '../objects/staff.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$postdata = file_get_contents('php://input');
+$postdata = $_POST['params'];
 $staff = new Staff($db);
 
 if (isset($postdata)) {

@@ -7,7 +7,7 @@ include_once '../config/database.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$postdata = file_get_contents('php://input');
+$postdata = $_POST['params'];
 if (isset($postdata)) {
 	$params = json_decode($postdata);
 	if (isset($params->id) || isset($params->name) || isset($params->working)) {
