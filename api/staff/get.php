@@ -63,15 +63,16 @@ if ($num > 0) {
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
+		$res=null;
     if($working==1){
-      $query='SELECT h.locationX, h.locationY, h.locationZ
-                        FROM Staff s
-                        LEFT JOIN HistoS h
-                        ON s.id=h.idStaff
-                        WHERE s.id=:id AND h.date IN
-                        ( SELECT MAX(h.date) as d
-                          FROM HistoS h
-                          WHERE idStaff=:id) ';
+      $query='SELECT h.locationX, h.locationY, h.floor
+			FROM Staff s
+      LEFT JOIN HistoS h
+      ON s.id=h.idStaff
+      WHERE s.id=:id AND h.date IN
+      ( SELECT MAX(h.date) as d
+      	FROM HistoS h
+      	WHERE idStaff=:id)';
       $pos=$db->prepare($query);
 
       $idTemp = htmlspecialchars(strip_tags($id));
