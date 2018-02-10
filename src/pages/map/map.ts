@@ -12,8 +12,19 @@ export interface mapItem{
   floor: string;
   date: string;
 }
+
+export interface mapItem2{
+  id: string;
+  name: string;
+  category: string;
+  locationX: string;
+  locationY: string;
+  floor: string;
+  date: string;
+}
 export interface dataItem{
   staff: mapItem[];
+  matt: mapItem[];
 }
 
 
