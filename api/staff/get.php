@@ -37,6 +37,7 @@ if (isset($postdata)) {
 		}
 		if (isset($params->name)) {
 			$nameTemp = htmlspecialchars(strip_tags($params->name));
+      $nameTemp="$nameTemp%";
 			$stmt->bindParam(':name', $nameTemp);
 		}
 		if (isset($params->working)) {

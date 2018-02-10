@@ -7,7 +7,7 @@ include_once '../config/database.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$postdata = file_get_contents('php://input');
+$postdata = $_POST['params'];
 if (isset($postdata)) {
 	$params = json_decode($postdata);
 	if (isset($params->id) || isset($params->name) || isset($params->category)) {
@@ -44,11 +44,11 @@ if (isset($postdata)) {
 			$stmt->bindParam(':category', $categoryTemp);
 		}
 	} else {
-		$query = 'SELECT s.id, s.name, s.category FROM Equipment e';
+		$query = 'SELECT e.id, e.name, e.category FROM Equipment e';
 		$stmt = $db->prepare($query);
 	}
 } else {
-	$query = 'SELECT s.id, s.name, s.category FROM Equipment e';
+	$query = 'SELECT e.id, e.name, e.category FROM Equipment e';
 	$stmt = $db->prepare($query);
 }
 
