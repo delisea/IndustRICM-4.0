@@ -1,7 +1,7 @@
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-   crossorigin=""/>
-<ion-header>
+ integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+ crossorigin=""/>
+ <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -9,12 +9,12 @@
     <ion-title>
       Map
     </ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button (click)="addMarker()">
         <ion-icon name="add"></ion-icon>
-          Add Marker
+        Add Marker
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="selectedLocalisable" (ionChange)="onLocalisableChanged($event)">
@@ -32,7 +32,9 @@
 </ion-header>
 
 <ion-content>
-  <div id="map" style="width:100%; height:100%;"></div>
+  <div id="map1" style="width:100%; height:100%;"></div>
+  <div id="map2" style="width:100%; height:100%;"></div>
+  <div id="map3" style="width:100%; height:100%;"></div>
 </ion-content>
 
 <ion-footer>

@@ -10,6 +10,13 @@ page-map {
 
   }
 
+  #map {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  }
+
   .leaflet-popup-tip {
     background:#ffffff;
     opacity:0;
